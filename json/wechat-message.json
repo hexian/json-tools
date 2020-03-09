@@ -1,0 +1,50 @@
+<!--
+  ignore: 
+                  可选值true/false, true表示忽略属性, 不生成bean的属性 (可以写在json的集合 + json的key 上)
+                  
+  overrideType: 
+                  程序会自动检测json中每个key的value属性的数据类型, 如果想替换可以使用这个属性进行替换, 比如 "2020-03-06 20:15:05" 想将生成的bean中使用Date (只可json的key上)
+                  可选的值在: com.example.json.constant.TypeMappings.TYPE_MAPPINGS 中进行定义
+                  
+  dateFormat: 
+                    只有数据类型是Date(也就是overrideType的值为date)时才生效, 用户给生成的bean增加日期格式化属性 (只可json的key上)
+                    
+  colType: 
+                    只能写在[]上面, 用于将json中的数组映射成为bean中的数组或者集合 (只可json的集合上key上),   可选值: list/array
+  
+  _class_ ： 这个属性是直接写在json上作为一个特殊的key, 它只能写在{}中, 如果不指定改值, 则生成的bean的属性是Map<String, Object>, 如果指定改值则生成的bean的名称就是改值 , 这个属性之后不能写任何注释
+  
+   说明:
+              如果集合里面的属性需要配置, 则只能写道第一个属性中, 程序只处理集合中的第1个属性, 第2项以后的全部忽略 (隐含条件是: 集合中的数据的类型都应该是相同的数据类型), 所以必须保证集合中的第一项的key是最全的, 缺少则请自己补充
+   
+-->
+{
+  "_class_": "com.hp.Message", 
+  "lint": [
+     "2020-03-06 20:15:05", // {'overrideType': 'date', 'dateFormat': 'yyyy-MM-dd HH:mm:ss'}
+     22 
+  ],
+  "aa": 123,       // {'ignore': false}
+  "bbb": "true",     // {'ignore': false, 'overrideType': 'boolean'}
+  "birth-day": "2020-03-06 20:15:05",     // {'ignore': false, 'overrideType': 'date', 'dateFormat': 'yyyy-MM-dd HH:mm:ss'}
+  "ccc": "2121212", // {'ignore': true}
+  "list": [// {'ignore': false, 'colType': 'array'}
+  	{
+  	  "_class_": "com.hp.VideoMessage", 
+  	  "aaa": "2020-03-06 20:15:05", // {'ignore': false, 'overrideType': 'date', 'dateFormat': 'yyyy-MM-dd HH:mm:ss'}
+  	  "bb": 123,
+  	  "subChild": [
+	  	  {
+	  	  	"pic": "http://www.baidu.com",
+	  	  	"bigPic": "http://www.baidu.com", // {'ignore': false, 'overrideType': 'boolean'}
+	  	     "_class_": "com.hp.Pic", 
+	  	  }
+  	  ]
+  	}
+  ],
+  "mapping": {// {'ignore': false}
+    "_class_": "com.hp.TextMessage", 
+  	"key1": "val1", 
+  	"key2": "val2"
+  }
+}
