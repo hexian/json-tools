@@ -1,5 +1,8 @@
 json转bean代码生成器
 
+ioc和aop直接copy的 https://github.com/zzzzbw/doodle 这个项目， 因为不满足 list注入，不能直接引入， 所以修改了部分代码， 协议 遵循原作者协议
+
+
 
 
 
